@@ -1,0 +1,64 @@
+<html>
+	<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<title>风车</title>
+	<script type="application/x-javascript">
+  	var speed = 1;
+  	var angle = 0;
+  	var r = 50;
+  	var x = 400;
+  	var y = 300;
+  	var canvas;
+  	var ctx;
+  	var flag = 1;
+  	
+    function draw() {
+      ctx.clearRect(0,0,1000,1000);
+			ctx.fillStyle = "black"
+			angle = angle + flag * 1/36*speed*Math.PI;
+			fanBlade(ctx, angle);
+			fanBlade(ctx, angle + Math.PI*2/3);
+			fanBlade(ctx, angle + Math.PI*4/3);
+    }
+    
+    function fanBlade(ctx, angle){
+    	ctx.beginPath();
+    	ctx.arc(x + r*Math.cos(angle), y + r*Math.sin(angle), r, angle, angle + Math.PI, true);
+    	ctx.fill();
+    }
+    
+    function start(){
+	    canvas = document.getElementById("canvas");
+      if (canvas.getContext) {
+      	ctx = canvas.getContext("2d");
+  			setInterval(draw, 20);
+  		}
+    }
+    
+    function change(){
+    	flag = -flag;
+    }
+    
+    function setSpeed(s){
+    	speed = s;
+    }
+    
+    function setR(rr){
+    	r = rr;
+    }
+  	</script>
+ </head>
+ <body onload="start();">
+   <canvas id="canvas" width="800" height="600" style="background-color:rgba(0, 0, 100, 0.5)"></canvas>
+   <div>
+   	<button onClick="change();">反向</button>
+   	<button onClick="setSpeed(1);">速度1</button>
+   	<button onClick="setSpeed(2);">速度2</button>
+   	<button onClick="setSpeed(3);">速度3</button>
+   	
+   	<button onClick="setR(30);">大小1</button>
+   	<button onClick="setR(50);">大小2</button>
+   	<button onClick="setR(70);">大小3</button>
+   <div>
+ </body>
+</html>

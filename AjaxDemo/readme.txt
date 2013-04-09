@@ -1,0 +1,3 @@
+Ajax.html中通过原生javascript实现了ajax访问servlet和webservice
+Ajax2.html中通过jquery实现了ajax访问servlet和webservice
+Ajax3.html将Ajax.html中的方法改造成类,简单实用了json

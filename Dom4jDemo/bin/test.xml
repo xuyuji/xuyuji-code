@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<father a="b">
+	<son c="d">
+		<action c="d">
+			fuck fuck fuck!!!
+		</action>
+	</son>
+	<action c="d">
+		fuck fuck fuck!!!
+	</action>
+	<a>
+		<b>
+			<c>
+				<d>
+					<e>
+					</e>
+				</d>
+			</c>
+		</b>
+	</a>
+</father>

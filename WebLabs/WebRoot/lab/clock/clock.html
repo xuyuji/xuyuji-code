@@ -1,0 +1,64 @@
+<html>
+     <head>
+          <script type="text/javascript" src="../jQuery v1.7.2.js"></script>
+          <script type="text/javascript">
+               function init(){
+                    for(var i=0; i < 24; i++)
+                         $(".h_ul").append("<li>"+(i<10?'0'+i:""+i)+"</li>")
+                    for(var i=0; i < 60; i++)
+                         $(".m_ul").append("<li>"+(i<10?'0'+i:""+i)+"</li>")
+                    for(var i=0; i < 60; i++)
+                         $(".s_ul").append("<li>"+(i<10?'0'+i:""+i)+"</li>")
+               }
+         
+               function Scroll(obj){
+                    $(obj).find("ul:first").animate({
+                         marginTop : "-25px"
+                    }, 500, function(){
+                         if(this.className == 's_ul' && $(this).find("li:first").text() == '59'){
+                              Scroll('.m');
+                         }
+                         if(this.className == 'm_ul' && $(this).find("li:first").text() == '59'){
+                              Scroll('.h');
+                         }
+                         $(this).css({marginTop : "0px"}).find("li:first").appendTo(this);                   
+                    })
+               }
+              
+               $(document).ready(function(){
+                    init();
+                    setInterval('Scroll(".s")', 1000);
+               });
+          </script>
+          <style>
+               ul,li{margin:0;padding:0}
+               li{
+                    height:25px;
+                    padding-left:10px;
+                    padding-top:5px;                   
+               }
+               div{
+                    height:29px;
+                    width:40px;
+                    position:relative;
+                   
+                    overflow:hidden;
+                    float:left;
+               }
+          </style>
+     </head>
+     <body>
+          <div class="h">
+               <ul class="h_ul">
+               </ul>
+          </div>
+          <div class="m">
+               <ul class="m_ul">
+               </ul>
+          </div>
+          <div class="s">
+               <ul class="s_ul">
+               </ul>
+          </div>
+     </body>
+</html>

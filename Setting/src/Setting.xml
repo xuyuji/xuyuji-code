@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<setting>
+	<param name="driver">com.microsoft.sqlserver.jdbc.SQLServerDriver</param>
+	<param name="url">jdbc\:sqlserver\://192.168.8.43\:1433;DatabaseName\=JDMP</param>
+	<param name="user">sa</param>
+	<param name="password">jetsen</param>
+	<!-- jdmp中configuration.properties内使用 -->
+	<param name="report.reportWebPath">http\://192.168.8.165\:8080/nmpreport</param>
+	<!-- report中configuration.properties内使用 -->
+	<param name="report.reportWebPath_2">http\://192.168.8.165\:8080</param>
+	<param name="JetsenNetWebPath">http\://192.168.8.165\:8080/jdmp</param>
+	<param name="report.jswebserviceurl">http\://192.168.8.165\:8080/jdmp/services/BMPPerfService?wsdl</param>
+	
+	<folder path="F:\jdmp_rel\JDMPV2.0.0.9198\JDMPV2.0.0.9198">
+		<file path="WebRoot\WEB-INF\classes\dbconfig.properties" type="properties">
+			<node name="uum_driver" ref="driver" />
+			<node name="uum_dburl" ref="url" />
+			<node name="uum_dbuser" ref="user" />
+			<node name="uum_dbpwd" ref="password" />
+			
+			<node name="bmp_driver" ref="driver" />
+			<node name="bmp_dburl" ref="url" />
+			<node name="bmp_dbuser" ref="user" />
+			<node name="bmp_dbpwd" ref="password" />
+			
+			<node name="nmp_driver" ref="driver" />
+			<node name="nmp_dburl" ref="url" />
+			<node name="nmp_dbuser" ref="user" />
+			<node name="nmp_dbpwd" ref="password" />
+			
+			<node name="mmp_driver" ref="driver" />
+			<node name="mmp_dburl" ref="url" />
+			<node name="mmp_dbuser" ref="user" />
+			<node name="mmp_dbpwd" ref="password" />
+			
+			<node name="dmp_driver" ref="driver" />
+			<node name="dmp_dburl" ref="url" />
+			<node name="dmp_dbuser" ref="user" />
+			<node name="dmp_dbpwd" ref="password" />
+			
+			<node name="mtc_driver" ref="driver" />
+			<node name="mtc_dburl" ref="url" />
+			<node name="mtc_dbuser" ref="user" />
+			<node name="mtc_dbpwd" ref="password" />
+			
+			<node name="bohui_driver" ref="driver" />
+			<node name="bohui_dburl" ref="url" />
+			<node name="bohui_dbuser" ref="user" />
+			<node name="bohui_dbpwd" ref="password" />
+		</file>
+		<file path="WebRoot\WEB-INF\classes\configuration.properties" type="properties">
+			<node name="db.url" ref="url" />
+			<node name="db.driver" ref="driver" />
+			<node name="db.user" ref="user" />
+			<node name="db.pwd" ref="password" />
+			
+			<node name="report.reportWebPath" ref="report.reportWebPath" />
+		</file>
+		<file path="WebRoot\WEB-INF\classes\config.properties" type="properties">
+			<node name="JetsenNetWebPath" ref="JetsenNetWebPath" />
+		</file>
+		<file path="dmpreport\WEB-INF\db.properties" type="properties">
+			<node name="driver" ref="driver" />
+			<node name="url" ref="url" />
+			<node name="userid" ref="user" />
+			<node name="password" ref="password" />
+		</file>
+		<file path="dmpreport\WEB-INF\classes\configuration.properties" type="properties">
+			<node name="db.driver" ref="driver" />
+			<node name="db.url" ref="url" />
+			<node name="db.user" ref="user" />
+			<node name="db.pwd" ref="password" />
+
+			<node name="report.jswebserviceurl" ref="report.jswebserviceurl" />
+			<node name="report.reportWebPath" ref="report.reportWebPath_2" />
+		</file>
+	</folder>
+</setting>

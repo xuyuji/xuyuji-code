@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<a>
+	<b xmlns="www.b1.com">
+		<c>
+		b1:c
+		</c>
+		<d>
+			<e>
+			</e>
+			<f>
+			</f>
+		</d>
+	</b>
+	<b xmlns="www.b2.com">
+		<c>
+		b2:c
+		</c>
+		<d>
+			<e>
+			</e>
+			<f>
+			</f>
+		</d>
+	</b>
+	<b xmlns="">
+		<c>
+		b:c
+		</c>
+		<d>
+			<e>
+			</e>
+			<f>
+			</f>
+		</d>
+	</b>
+	<g>
+		<h>
+			<i>
+			</i>
+			<j>
+			</j>
+		</h>
+	</g>
+</a>

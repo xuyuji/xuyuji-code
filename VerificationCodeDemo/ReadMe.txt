@@ -1,0 +1,3 @@
+通过java类库生成验证码的Demo
+index.jsp中是servlet流形式。
+xuyuji.util.ImgToFile.java是生成验证码图片文件。

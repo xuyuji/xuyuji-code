@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		//ajax调用servlet
+		$("#servlet button").click(function(){
+			$.get("http://localhost:8080/AjaxDemo/SayHello", 
+				{name:$("#servlet input").val()}, 
+				function (data, textStatus){
+					$("#servlet span").text(data);
+				}
+			);
+			/*
+			$.ajax({
+				type:"GET",
+				url:"http://localhost:8080/AjaxDemo/SayHello",
+				data:{name:$("#servlet input").val()},
+				contentType:"application/json;utf-8",
+				datatype:'json',
+				success:function(result){
+					alert(result);
+				}
+			});
+			*/
+		});
+		//ajax调用webservice
+		$("#webservice button").click(function(){
+			$.ajax({
+				type:"POST",
+				contentType:"text/xml",
+				url:"http://localhost:8080/AjaxDemo/services/SayHiService",
+				data:getPostData(),
+				dataType: "xml", 
+				success: function(xml) { 
+					if($.browser.msie){ 
+                   		$("#webservice span").append(xml.getElementsByTagName("ns1:out")[0].childNodes[0].nodeValue+"<br/>");
+            		}
+            		else{
+                		$(xml).find("out").each(function(){
+	                      	$("#webservice span").text($(this).text());
+	                	})
+            		}
+				} 
+			});
+		});
+	});
+	//定义满足SOAP协议的参数。
+	function getPostData()
+	{
+		//根据WSDL分析sayHelloWorld是方法名，parameters是传入参数名
+	    var postdata="<?xml version=\"1.0\" encoding=\"utf-8\"?>";
+	    postdata+="<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">";
+	   	postdata+="<soap:Body><sayHi xmlns=\"http://tempuri.org/\">";
+	   	postdata+="<name>"+$("#webservice input").val()+"</name>";
+	    postdata+="</sayHi></soap:Body>";
+	    postdata+="</soap:Envelope>";
+	    return postdata;
+	}
+</script>
+
+</head>
+<body>
+	<div id="servlet">
+		<input></input>
+		<button>请求</button>
+		<span></span>
+	</div>
+	<div id="webservice">
+		<input></input>
+		<button>请求</button>
+		<span></span>
+	</div>
+</body>
+</html>

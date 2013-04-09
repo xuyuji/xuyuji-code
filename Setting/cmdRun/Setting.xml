@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<setting>
+	<param name="driver">oracle.jdbc.driver.OracleDriver</param>
+	<param name="url">jdbc\:oracle\:thin\:@192.168.8.19\:1521\:JS45ORA</param>
+	<param name="user">jnmpsc</param>
+	<param name="password">jnmpsc</param>
+	<param name="jnmp_ip">192.168.8.118</param>
+	<param name="jnmp_port">8080</param>
+	<param name="jnmp_name">JNMPOR_SC</param>
+	<param name="jnmpreport_ip">192.168.8.118</param>
+	<param name="jnmpreport_port">8080</param>
+	<param name="jnmpreport_name">nmpreport_sc</param>
+	<param name="report.reportWebPath">http\://192.168.8.118\:8080/nmpreport_sc</param>
+	<param name="sobey.serviceUrl">http\://192.168.8.118\:8080/JNMPOR_SC/services/BMPSCSystemService?wsdl</param>
+	<param name="JetsenNetWebPath">http\://192.168.8.118\:8080/JNMPOR_SC/</param>
+	<param name="report.jswebserviceurl">http\://192.168.8.118\:8080/JNMPOR_SC/services/BMPPerfService?wsdl</param>
+	
+	<folder path="F:\sc_rel\JNMP_SCV1.3.0.9107">
+		<file path="WebRoot\WEB-INF\classes\dbconfig.properties" type="properties">
+			<node name="uum_driver" ref="driver" />
+			<node name="uum_dburl" ref="url" />
+			<node name="uum_dbuser" ref="user" />
+			<node name="uum_dbpwd" ref="password" />
+			
+			<node name="bmp_driver" ref="driver" />
+			<node name="bmp_dburl" ref="url" />
+			<node name="bmp_dbuser" ref="user" />
+			<node name="bmp_dbpwd" ref="password" />
+			
+			<node name="nmp_driver" ref="driver" />
+			<node name="nmp_dburl" ref="url" />
+			<node name="nmp_dbuser" ref="user" />
+			<node name="nmp_dbpwd" ref="password" />
+		</file>
+		<file path="WebRoot\WEB-INF\classes\configuration.properties" type="properties">
+			<node name="db.url" ref="url" />
+			<node name="db.driver" ref="driver" />
+			<node name="db.user" ref="user" />
+			<node name="db.pwd" ref="password" />
+			
+			<node name="jnmp_sc.reportProName" ref="jnmpreport_ip" />
+			<node name="jnmp_sc.reportProIp" ref="jnmpreport_name" />
+			<node name="jnmp_sc.reportProPort" ref="jnmpreport_port" />
+			
+			<node name="report.reportWebPath" ref="report.reportWebPath" />
+			<node name="sobey.serviceUrl" ref="sobey.serviceUrl" />
+		</file>
+		<file path="WebRoot\WEB-INF\classes\config.properties" type="properties">
+			<node name="JetsenNetWebPath" ref="JetsenNetWebPath" />
+		</file>
+		<file path="nmpreport\WEB-INF\db.properties" type="properties">
+			<node name="driver" ref="driver" />
+			<node name="url" ref="url" />
+			<node name="userid" ref="user" />
+			<node name="password" ref="password" />
+		</file>
+		<file path="nmpreport\WEB-INF\classes\configuration.properties" type="properties">
+			<node name="db.driver" ref="driver" />
+			<node name="db.url" ref="url" />
+			<node name="db.user" ref="user" />
+			<node name="db.pwd" ref="password" />
+			
+			<node name="jnmp_sc.ip" ref="jnmp_ip" />
+			<node name="jnmp_sc.port" ref="jnmp_port" />
+			<node name="jnmp_sc.name" ref="jnmp_name" />
+			<node name="report.jswebserviceurl" ref="report.jswebserviceurl" />
+		</file>
+		<file path="nmpreport\WEB-INF\classes\dbconfig.properties" type="properties">
+			<node name="uum_driver" ref="driver" />
+			<node name="uum_dburl" ref="url" />
+			<node name="uum_dbuser" ref="user" />
+			<node name="uum_dbpwd" ref="password" />
+			
+			<node name="bmp_driver" ref="driver" />
+			<node name="bmp_dburl" ref="url" />
+			<node name="bmp_dbuser" ref="user" />
+			<node name="bmp_dbpwd" ref="password" />
+			
+			<node name="nmp_driver" ref="driver" />
+			<node name="nmp_dburl" ref="url" />
+			<node name="nmp_dbuser" ref="user" />
+			<node name="nmp_dbpwd" ref="password" />
+		</file>
+	</folder>
+</setting>

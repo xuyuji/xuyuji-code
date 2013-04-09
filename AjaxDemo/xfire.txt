@@ -1,0 +1,25 @@
+1.xfire包
+xfire-all-1.2.6.jar xfire-distribution-1.2.6.zip包里lib下的所有jar包（查不到最小依赖，无奈）
+
+2.xfire配置文件
+WebRoot/WEB-INF/META-INF/xfire/services.xml
+注意：此处文件夹META-INF原本工程里没有，是新建的，不是和WEB-INF同级的那个META-INF。
+
+3.在web.xml中添加xfire的servlet
+<servlet>
+	<servlet-name>XFireServlet</servlet-name>
+	<display-name>XFire Servlet</display-name>
+	<servlet-class>org.codehaus.xfire.transport.http.XFireConfigurableServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>XFireServlet</servlet-name>
+	<url-pattern>/servlet/XFireServlet/*</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+	<servlet-name>XFireServlet</servlet-name>
+	<url-pattern>/services/*</url-pattern>
+</servlet-mapping>
+
+4.webservice查看路径:http://localhost:8080/[projectname]/services
+
+5.webservice中暴露出来的方法是依据services.xml中配置的接口决定的。

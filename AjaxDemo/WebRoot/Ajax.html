@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+
+<script type="text/javascript">
+var xmlHttp;
+function request1(){
+	if (window.ActiveXObject) {
+		xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+	} else if (window.XMLHttpRequest) {
+		xmlHttp = new XMLHttpRequest();
+	};
+	var name1 = document.getElementById("name1").value;
+	if(name1 != ""){
+		if(xmlHttp){
+			var url = "http://localhost:8080/AjaxDemo/SayHello?name="+name1;
+			xmlHttp.open("GET", url, true);
+			xmlHttp.send(null);
+			xmlHttp.onreadystatechange = callback1;
+		}
+	}else{
+		document.getElementById("span_servlet").innerText = "请填写姓名！";
+	}
+}
+function callback1(){
+	if(xmlHttp.readyState == 4){
+		if(xmlHttp.status == 200){
+			document.getElementById("span_servlet").innerText = xmlHttp.responseText;
+		}
+	}
+}
+
+function request2(){
+	if (window.ActiveXObject) {
+		xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+	} else if (window.XMLHttpRequest) {
+		xmlHttp = new XMLHttpRequest();
+	};
+	var name2 = document.getElementById("name2").value;
+	if(name2 != ""){
+		if(xmlHttp){
+			var url = "http://localhost:8080/AjaxDemo/services/SayHiService";
+			var data;
+			data = '<?xml version="1.0" encoding="utf-8"?>';
+			data = data	+ '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">';
+			data = data + '<soap:Body>';
+			data = data + '<sayHi xmlns="http://tempuri.org">';
+			data = data + '<Name>' + name2 + '</Name>';
+			data = data + '</sayHi>';
+			data = data + '</soap:Body>';
+			data = data + '</soap:Envelope>';
+		
+			//设置回调函数
+			xmlHttp.onreadystatechange = callback2;
+			xmlHttp.open("POST", url, true);
+			xmlHttp.setRequestHeader("Content-Type", "json/xml; charset=utf-8");
+			xmlHttp.setRequestHeader("SOAPAction", "http://tempuri.org/example");
+			xmlHttp.send(data);//发送请求
+		}
+	}else{
+		document.getElementById("span_webservice").innerText = "请填写姓名！";
+	}
+}
+function callback2(){
+	if(xmlHttp.readyState == 4){
+		if(xmlHttp.status == 200){
+			document.getElementById("span_webservice").innerText = xmlHttp.responseXML.getElementsByTagName("out")[0].firstChild.nodeValue;
+		}
+	}
+}
+</script>
+
+<style type="text/css">
+	div{
+		width:600px;
+		height:200px;
+	}
+	span{
+		color:red;
+	}
+</style>
+
+</head>
+<body>
+	<div>
+		<input id="name1"></input>
+		<button onclick="request1();">请求servlet</button>
+		<span id="span_servlet"></span>
+	</div>
+	<div>
+		<input id="name2"></input>
+		<button onclick="request2();">请求webservice</button>
+		<span id="span_webservice"></span>
+	</div>
+</body>
+</html>

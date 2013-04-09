@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+var ajax = function(){
+	if (window.ActiveXObject) {
+		this.xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+	} else if (window.XMLHttpRequest) {
+		this.xmlHttp = new XMLHttpRequest();
+	};
+	this.callServlet = function(url, parameter, callback){
+		if(this.xmlHttp){
+			url += '?';
+			for(attribute in parameter){
+				url	+= attribute + '=' + eval('parameter.' + attribute);		
+			}
+			this.xmlHttp.open("GET", url, true);
+			this.xmlHttp.onreadystatechange = function(){
+				if(this.readyState == 4){
+					if(this.status == 200){
+						eval('var result = ' + this.responseText);
+						callback(result);
+					}
+				}
+			}
+			this.xmlHttp.send(null);
+		}
+	}
+	this.callWebService = function(url, method, parameter, callback){
+		if(this.xmlHttp){
+			var data = '<?xml version="1.0" encoding="utf-8"?>';
+			data = data	+ '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">';
+			data = data + '<soap:Body>';
+			data = data + '<' + method + ' xmlns="http://tempuri.org">';
+			for(attribute in parameter){
+				data = data + '<' + attribute + '>' + eval('parameter.' + attribute) + '</' + attribute + '>';
+			}
+			data = data + '</' + method + '>';
+			data = data + '</soap:Body>';
+			data = data + '</soap:Envelope>';
+			
+			this.xmlHttp.open("POST", url, true);
+			this.xmlHttp.setRequestHeader("Content-Type", "json/xml; charset=utf-8");
+			this.xmlHttp.setRequestHeader("SOAPAction", "http://tempuri.org/example");
+			this.xmlHttp.onreadystatechange = function(){
+				if(this.readyState == 4){
+					if(this.status == 200){
+						callback(this.responseXML.getElementsByTagName("out")[0].firstChild.nodeValue);
+					}
+				}
+			}
+			this.xmlHttp.send(data);
+		}
+	}
+}
+var test = new ajax();
+function request1(){
+	var name1 = document.getElementById("name1").value;
+	if(name1 != ""){
+		test.callServlet('http://localhost:8080/AjaxDemo/SayHello2',{name:name1},callback1);
+	}else{
+		document.getElementById("span_servlet").innerText = "请填写姓名！";
+	}
+}
+function callback1(result){
+	document.getElementById("span_servlet").innerText = result.result;
+}
+
+function request2(){
+	var name2 = document.getElementById("name2").value;
+	if(name2 != ""){
+		test.callWebService('http://localhost:8080/AjaxDemo/services/SayHiService', 'sayHi', {name:name2}, callback2);
+	}else{
+		document.getElementById("span_webservice").innerText = "请填写姓名！";
+	}
+}
+function callback2(result){
+	document.getElementById("span_webservice").innerText = result;
+}
+</script>
+
+<style type="text/css">
+	div{
+		width:600px;
+		height:200px;
+	}
+	span{
+		color:red;
+	}
+</style>
+
+</head>
+<body>
+	<div>
+		<input id="name1"></input>
+		<button onclick="request1();">请求servlet</button>
+		<span id="span_servlet"></span>
+	</div>
+	<div>
+		<input id="name2"></input>
+		<button onclick="request2();">请求webservice</button>
+		<span id="span_webservice"></span>
+	</div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>triangle</title>
+<style>
+	div{
+		margin:10px;
+		float:left;
+	}
+	.triangle_up{
+		width:0px;
+		height:0px;
+		border-left:50px solid transparent;
+		border-right:50px solid transparent;
+		border-bottom:100px red solid;
+	}
+	.triangle_down{
+		width:0px;
+		height:0px;
+		border-left:50px transparent solid;
+		border-right:50px transparent solid;
+		border-top:100px red solid;
+	}
+	.triangle_left{
+		width:0px;
+		height:0px;
+		border-top:50px transparent solid;
+		border-bottom:50px transparent solid;
+		border-right:100px red solid;
+	}
+	.triangle_right{
+		width:0px;
+		height:0px;
+		border-top:50px transparent solid;
+		border-bottom:50px transparent solid;
+		border-left:100px red solid;
+	}
+</style>
+<script type="text/javascript">
+	window.onload = function(){
+		var divs = document.getElementsByTagName('div');
+		for(var i=0; i<divs.length; i++){
+			//此方法IE不支持
+			divs[i].addEventListener("click",change);
+		}
+	}
+	function change(){
+		switch(this.className){
+			case 'triangle_up':
+				this.className = 'triangle_left';
+				break;
+			case 'triangle_left':
+				this.className = 'triangle_down';
+				break;
+			case 'triangle_down':
+				this.className = 'triangle_right';
+				break;
+			case 'triangle_right':
+				this.className = 'triangle_up';
+				break;
+			default:
+				this.className = 'triangle_up';
+				break;
+		}
+	}
+</script>
+</head>
+<body>
+	<div class="triangle_up"></div>
+	<div class="triangle_down"></div>
+	<div class="triangle_left"></div>
+	<div class="triangle_right"></div>
+</body>
+</html>

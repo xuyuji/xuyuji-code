@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans  xmlns="http://www.springframework.org/schema/beans"  
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+	xmlns:context="http://www.springframework.org/schema/context"  
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">  
+
+	<bean id="mysqldatasource" class="com.mysql.jdbc.jdbc2.optional.MysqlDataSource">
+		<property name="URL" value="jdbc:mysql://localhost/test"></property>
+		<property name="User" value="root"></property>
+		<property name="Password" value=""></property>
+	</bean>
+	  
+	<bean id="run" class="org.apache.commons.dbutils.QueryRunner">
+		<constructor-arg ref="mysqldatasource"></constructor-arg>
+	</bean>
+	
+	<bean id="personDaoImpl" class="org.xuyuji.DaoDemo.dbutils.PersonDaoImplSpring">
+		<property name="run" ref="run"></property>
+	</bean>
+	
+</beans>
